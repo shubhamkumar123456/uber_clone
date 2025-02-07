@@ -54,4 +54,69 @@ Registers a new user by validating the provided email, password, and fullname.
 }
 ```
 
+## POST /users/login
+
+### Description
+
+Authenticates a user with email and password, returning an authentication token if credentials are valid.
+
+### HTTP Method
+
+POST
+
+### Request Data
+
+- **email**: string, required, in a valid email format
+- **password**: string, required, minimum 6 characters
+
+### Responses
+
+**Success (200 OK)**
+
+- Returns the user object and an authentication token.
+
+```
+{
+  "user": { /* user data */ },
+  "token": "jwt_token"
+}
+```
+
+**Validation Error (400 Bad Request)**
+
+- Returns errors if request validation fails.
+
+```
+{
+  "errors": [
+    {
+      "msg": "Error message",
+      "param": "field_name",
+      "location": "body"
+    }
+    // ...more errors
+  ]
+}
+```
+
+**Unauthorized (401 Unauthorized)**
+
+- Returned when credentials are invalid.
+
+```
+{
+  "message": "Invalid email or password"
+}
+```
+
+**Server Error (500 Internal Server Error)**
+
+- Returns an error message if an unexpected error occurs.
+
+```
+{
+  "error": "Error message"
+}
+```
+
 // ...additional documentation if needed...
