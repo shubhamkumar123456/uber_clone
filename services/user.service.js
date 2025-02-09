@@ -13,3 +13,4 @@ exports.createUser = async({firstname,lastname,email,password})=>{
     });
     return await user.save();
 }
+

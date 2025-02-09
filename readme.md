@@ -119,4 +119,74 @@ POST
 }
 ```
 
+## GET /users/profile
+
+### Description
+
+Retrieves the profile of the authenticated user. Requires a valid token via cookies or Authorization header.
+
+### HTTP Method
+
+GET
+
+### Request Data
+
+Headers:
+
+- Authorization: Bearer <token>
+- Cookie: token=<token>
+
+### Responses
+
+**Success (200 OK)**
+
+```
+{
+  "user": { /* user profile data */ }
+}
+```
+
+**Unauthorized (401 Unauthorized)**
+
+```
+{
+  "message": "Unauthorized"
+}
+```
+
+## GET /users/logout
+
+### Description
+
+Logs out the current user by clearing the authentication token cookie and blacklisting the token. Requires a valid token via cookies or Authorization header.
+
+### HTTP Method
+
+GET
+
+### Request Data
+
+Headers:
+
+- Authorization: Bearer <token>
+- Cookie: token=<token>
+
+### Responses
+
+**Success (200 OK)**
+
+```
+{
+  "message": "Logged out successfully"
+}
+```
+
+**Unauthorized (401 Unauthorized)**
+
+```
+{
+  "message": "Unauthorized"
+}
+```
+
 // ...additional documentation if needed...
