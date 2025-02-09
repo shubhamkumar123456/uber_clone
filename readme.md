@@ -246,4 +246,131 @@ POST
 }
 ```
 
+## POST /captain/login
+
+### Description
+
+Authenticates a captain with email and password, returning an authentication token if credentials are valid.
+
+### HTTP Method
+
+POST
+
+### Request Data
+
+- **email**: string, required, in a valid email format
+- **password**: string, required, minimum 6 characters
+
+### Responses
+
+**Success (200 OK)**
+
+```
+{
+  "captain": { /* captain data */ },
+  "token": "jwt_token"
+}
+```
+
+**Validation Error (400 Bad Request)**
+
+```
+{
+  "errors": [
+    {
+      "msg": "Error message",
+      "param": "field_name",
+      "location": "body"
+    }
+    // ...more errors
+  ]
+}
+```
+
+**Unauthorized (401 Unauthorized)**
+
+```
+{
+  "message": "Invalid email or password"
+}
+```
+
+**Server Error (500 Internal Server Error)**
+
+```
+{
+  "error": "Error message"
+}
+```
+
+## GET /captain/profile
+
+### Description
+
+Retrieves the profile of the authenticated captain. Requires a valid token via cookies or Authorization header.
+
+### HTTP Method
+
+GET
+
+### Request Data
+
+Headers:
+
+- Authorization: Bearer <token>
+- Cookie: token=<token>
+
+### Responses
+
+**Success (200 OK)**
+
+```
+{
+  "captain": { /* captain profile data */ }
+}
+```
+
+**Unauthorized (401 Unauthorized)**
+
+```
+{
+  "message": "Unauthorized"
+}
+```
+
+## GET /captain/logout
+
+### Description
+
+Logs out the current captain by clearing the authentication token cookie and blacklisting it. Requires a valid token via cookies or Authorization header.
+
+### HTTP Method
+
+GET
+
+### Request Data
+
+Headers:
+
+- Authorization: Bearer <token>
+- Cookie: token=<token>
+
+### Responses
+
+**Success (200 OK)**
+
+```
+{
+  "message": "Logged out successfully"
+}
+```
+
+**Unauthorized (401 Unauthorized)**
+
+```
+{
+  "message": "Unauthorized"
+}
+```
+
 // ...additional documentation if needed...
