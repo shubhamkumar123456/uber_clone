@@ -189,4 +189,61 @@ Headers:
 }
 ```
 
+## POST /captain/register
+
+### Description
+
+Registers a new captain by validating the provided email, password, fullname, and vehicle information.
+
+### HTTP Method
+
+POST
+
+### Request Data
+
+- **fullname**: an object containing:
+  - **firstname** (string, required, minimum 3 characters)
+  - **lastname** (string, optional, minimum 3 characters if provided)
+- **email**: string, required, in a valid email format
+- **password**: string, required, minimum 6 characters
+- **vehicle**: an object containing:
+  - **color** (string, required, minimum 3 characters)
+  - **plate** (string, required, minimum 3 characters)
+  - **capacity** (number, required, minimum value 1)
+  - **vehicletype** (string, required, one of: 'car', 'auto', 'motocycle')
+
+### Responses
+
+**Success (201 Created)**
+
+```
+{
+  "captain": { /* captain data */ },
+  "token": "jwt_token"
+}
+```
+
+**Validation Error (400 Bad Request)**
+
+```
+{
+  "errors": [
+    {
+      "msg": "Error message",
+      "param": "field_name",
+      "location": "body"
+    }
+    // ...more errors
+  ]
+}
+```
+
+**Server Error (500 Internal Server Error)**
+
+```
+{
+  "error": "Error message"
+}
+```
+
 // ...additional documentation if needed...
